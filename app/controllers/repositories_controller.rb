@@ -3,12 +3,13 @@ class RepositoriesController < ApplicationController
   def index
     @user_resp = Faraday.get 'https://api.github.com/user' do |req|
       req.headers['Authorization'] = "token #{session[:token]}"
-    @resp = Faraday.get 'https://api.github.com/user/repos' do |req|
+    end
+    @repo_resp = Faraday.get 'https://api.github.com/user/repos' do |req|
       req.headers['Accept'] = 'application/json'
       req.headers['Authorization'] = "token #{session[:token]}"
     end
-    parsed_json = JSON.parse(@resp.body)
-    if @resp.success?
+    parsed_repos = JSON.parse(@resp.body)
+    if @repo_resp.success? && @user_resp
       @repos = parsed_json
     else
       @error = "Something went wrong."
