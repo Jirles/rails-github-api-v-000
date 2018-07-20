@@ -8,9 +8,11 @@ class RepositoriesController < ApplicationController
       req.headers['Accept'] = 'application/json'
       req.headers['Authorization'] = "token #{session[:token]}"
     end
-    parsed_repos = JSON.parse(@resp.body)
-    if @repo_resp.success? && @user_resp
-      @repos = parsed_json
+    parsed_repos = JSON.parse(@repo_resp.body)
+    parse_user = JSON.parse(@user_resp.body)
+    if @repo_resp.success? && @user_resp.success?
+      @repos = parsed_repos
+      @user = parsed_user
     else
       @error = "Something went wrong."
     end
