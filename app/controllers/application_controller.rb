@@ -12,8 +12,7 @@ class ApplicationController < ActionController::Base
       client_id = ENV['GITHUB_CLIENT_ID']
       redirect_uri = 'http://localhost:3000/auth'
       scope = 'repo'
-      state = ENV['GITHUB_STATE']
-      redirect_to "https://github.com/login/oauth/authorize?client_id=#{client_id}&redirect_uri=#{redirect_uri}&scope=#{scope}&state=#{state}" unless logged_in?
+      redirect_to "https://github.com/login/oauth/authorize?client_id=#{client_id}&redirect_uri=#{redirect_uri}&scope=#{scope}" unless logged_in?
     end
 
     def logged_in?
