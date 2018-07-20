@@ -4,8 +4,6 @@ class RepositoriesController < ApplicationController
     @resp = Faraday.get 'https://api.github.com/user/repos' do |req|
       req.headers['Accept'] = 'application/json'
       req.headers['Authorization'] = "token #{session[:token]}"
-      req.params['affiliation'] = 'owner'
-      req.params['sort'] = 'updated'
     end
     parsed_json = JSON.parse(@resp.body)
     if @resp.success?
