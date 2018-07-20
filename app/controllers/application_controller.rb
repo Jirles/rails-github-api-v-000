@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
       client_id = ENV['GITHUB_CLIENT_ID']
       redirect_uri = auth_path
       scope = 'repo'
-      redirect_to "https://github.com/login/oauth/authorize?client_id=#{client_id}&redirect_uri=#{redirect_uri}&scope=#{scope}" unless logged_in?
+      redirect_to "https://github.com/login/oauth/authorize?client_id=#{client_id}&redirect_uri=#{auth_path}&scope=#{scope}" unless logged_in?
     end
 
     def logged_in?
